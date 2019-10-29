@@ -19,13 +19,13 @@ class DataStorageManager
         end
     end
 
-    def self.init(message):
+    def self.init(message)
         path_to_file = message[0]
         self.stop_word_manager = message[1]
         self.data = File.open(path_to_file,"r").read
     end
 
-    def self.process_words(message):
+    def self.process_words(message)
         recipient = message[0]
         data_str = ''.join(self.data)
         words = data_str.split()
@@ -76,15 +76,15 @@ class WordFrequencyManager
         @word_freqs = []
     end
 
-    def self.dispatch(message):
-        if message[0] == ’word’:
+    def self.dispatch(message)
+        if message[0] == ’word’
             self.increment_count(message[1])
         elsif message[0] == ’top25’
             self.top25(message[1])
         end
     end
 
-    def self.increment_count(message):
+    def self.increment_count(message)
         word = message[0]
         if @word_freqs.include? word
             self.word_freqs[word] =+ 1
@@ -93,7 +93,7 @@ class WordFrequencyManager
         end
     end
 
-    def self.top25(message):
+    def self.top25(message)
         recipient = message[0]
         freqs_sorted = self.word_freqs.sort 
         send(recipient, [’top25’, freqs_sorted])
@@ -115,9 +115,9 @@ class WordFrequencyController
         self.storage_manager = message[0]
         send(self.storage_manager, ["send_word_freqs", self])
     end 
-    def self.display(message):
+    def self.display(message)
         word_freqs = message[0]
-        for (w, f) in word_freqs[0:25]:
+        for (w, f) in word_freqs[0:25]
         print  w, "- ", f
         send(self.storage_manager, ["die"])
         self.stop = True
