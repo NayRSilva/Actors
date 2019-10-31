@@ -45,10 +45,10 @@ class StopWordManager
         if message[0] == 'init'
             self.init(message[1])
         elsif message[0]=='filter'
-            self.filter(message[1])
+            self.filter(message[1..-1])
             
         else 
-            send(self.word_fres_manager, message)
+            send(self.word_freqs_manager, message)
         end
 
     end

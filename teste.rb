@@ -1,26 +1,58 @@
 class Car
-    @@color = Queue.new
+    @@color 
     def initialize (teste = "Azul")
-            @@color << teste
+            @@color = teste
     end
 
     def get
-        @@color.pop
+        self.set('red')
     end
     def set(value)
-        @@color << value 
+        @@color = value
     end
 
 end
 
-a = Car.new
-a.set("verde")
-p a.get
-p a.get
-p a.get
+
+class Bike
+    attr_accessor :test
+    def initialize(color)
+        @@color = color
+        @@cars = Queue.new
+        @@cars << self
+    end
+
+    def get
+        @test = 'azul'
+        @@cars.pop
+    end
+    def printf 
+        puts "entrou aqui"
+    end
+
+    def getColor
+        @@color
+    end
+end
+
+a = Bike.new("verde")
+puts a.get.test
 
 
 
+a = {'a' => 10, 'b' => 11, 'c' => 14}
+h = a.sort_by{|k,v| v}.reverse.to_h
+
+puts h
+
+
+# unless a.include? 'd'
+#     a['d'] = 15 
+#     puts a['d']
+# end
+
+# a=0
+# puts a += 1 
 
 
 # queue = Queue.new
