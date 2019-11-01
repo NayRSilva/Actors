@@ -5,7 +5,7 @@ class Car
     end
 
     def get
-        self.set('red')
+        @@color
     end
     def set(value)
         @@color = value
@@ -17,9 +17,10 @@ end
 class Bike
     attr_accessor :test
     def initialize(color)
-        @@color = color
         @@cars = Queue.new
-        @@cars << self
+        @@cars << color 
+        @@cars << color 
+        @@cars << color 
     end
 
     def get
@@ -33,17 +34,26 @@ class Bike
     def getColor
         @@color
     end
+
+    def start
+        while !@@cars.empty?
+            puts "#{self.get.get} car #{@@cars.size}"
+        end
+    end
 end
 
-a = Bike.new("verde")
-puts a.get.test
+b = Car.new()
+a = Bike.new(b)
+b = Thread.new do
+        c = Cars.new
+        a.start
+    end
+puts "#{c.get} valor de c"
+b.join
 
 
 
-a = {'a' => 10, 'b' => 11, 'c' => 14}
-h = a.sort_by{|k,v| v}.reverse.to_h
 
-puts h
 
 
 # unless a.include? 'd'
