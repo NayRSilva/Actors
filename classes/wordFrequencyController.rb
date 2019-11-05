@@ -17,7 +17,7 @@ class WordFrequencyController
     
     def run(message)
         @@storage_manager = message[0]
-        SendMessage.send(self, ['send_word_freqs', self])
+        SendMessage.send(@@storage_manager, ['send_word_freqs', self])
     end
     
     def display(message)

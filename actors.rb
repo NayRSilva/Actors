@@ -22,16 +22,16 @@ threads << Thread.new do
      stop_word_manager.inicializa
 end
 
-storage_manager = DataStorageManager.new
+data_storage_manager = DataStorageManager.new
 
 threads << Thread.new do
-    SendMessage.send(storage_manager, ['init', 'dracula.txt', stop_word_manager])
-    storage_manager.inicializa
+    SendMessage.send(data_storage_manager, ['init', 'dracula.txt', stop_word_manager])
+    data_storage_manager.inicializa
 end
 
 wfcontroller = WordFrequencyController.new
 threads << Thread.new do
-    SendMessage.send(wfcontroller, ['run', storage_manager])
+    SendMessage.send(wfcontroller, ['run', data_storage_manager])
     wfcontroller.inicializa
 end
 
